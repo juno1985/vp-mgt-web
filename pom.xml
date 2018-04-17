@@ -6,6 +6,7 @@
 		<groupId>org.softcits.vp</groupId>
 		<artifactId>vp-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../vp-parent</relativePath>
 	</parent>
 	<artifactId>vp-mgt-web</artifactId>
 
