@@ -6,3 +6,5 @@ logging:
   file: logs/vp-mgt.log #can use relative position for the log configuration
   level:
     root: info
+    
+pc.upload.path: /upload/pc_pic
