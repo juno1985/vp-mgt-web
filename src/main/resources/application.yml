@@ -6,5 +6,9 @@ logging:
   file: logs/vp-mgt.log #can use relative position for the log configuration
   level:
     root: info
-    
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
 pc.upload.path: /upload/pc_pic

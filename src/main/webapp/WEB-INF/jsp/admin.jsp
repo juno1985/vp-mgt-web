@@ -1,24 +1,24 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<title>后台管理</title>
-<!-- 引入BootStrap CSS样式文件 -->
 <link rel="stylesheet"
-	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	href="/mgt/css/bootstrap.min.css">
 <!-- 引入jQuery文件 -->
 <script type="text/javascript"
-	src="http://cdn.static.runoob.com/libs/jquery/2.2.1/jquery.min.js"></script>
+	src="/mgt/js/jquery.min.js"></script>
 <script type="text/javascript"
-	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	src="/mgt/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="/mgt/js/pc_admin.js"></script>
 <script type="text/javascript"
-	src="/mgt/js/jquery.form.js"></script>	
+	src="/mgt/js/jquery.form.js"></script>
+<title>后台管理</title>
 </head>
 <body>
-	<div class="container">
+<div class="container">
 		<div class="row">
 			<nav class="navbar navbar-default navbar-static-top"
 				role="navigation">
@@ -104,7 +104,5 @@
 			<div class="col-md-8" id="mgt_content"></div>
 		</div>
 	</div>
-	
 </body>
-
 </html>
