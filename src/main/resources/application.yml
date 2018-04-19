@@ -12,3 +12,5 @@ spring:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
 pc.upload.path: /upload/pc_pic
+pc.rest.url: http://localhost:8002/rest-api
+pc.admin.url: /admin/pc

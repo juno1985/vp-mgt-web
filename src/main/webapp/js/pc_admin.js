@@ -11,7 +11,7 @@ $(document).ready(function(){
 function pc_list(){
 	$('#mgt_content').children().remove();
 	$.ajax({
-		url: "/mgt/computer/list",
+		url: "/mgt/admin/pc/list",
 		type: "GET",
 		dataType: "json",
 		success:function(data){
@@ -24,8 +24,8 @@ function pc_list(){
 				 * v.pic);
 				 */
 				content += "<tr><td>"+v.id+'</td><td><a id="pc" href="javascript:void(0);" onClick="pcClick(this)" value="'+ v.id +'">'+v.trademark+"</a></td><td>"+v.price+"元</td>"+
-							'<td><a href="/mgt/computer/update/'+v.id+'">更新</a></td>'+
-							'<td><a href="/mgt/computer/delete/'+v.id+'">删除</a></td>'+
+							'<td><a href="/mgt/admin/pc/update/'+v.id+'">更新</a></td>'+
+							'<td><a href="/mgt/admin/pc/delete/'+v.id+'">删除</a></td>'+
 							"</tr>";
 			}); 
 			content += "</table></tbody>";
@@ -41,11 +41,10 @@ function pc_add(obj){
 	});
 }
 function pc_add_submit(){
-	console.log($('#pcForm'));
 	//表单无内容则禁止提交
 	var pc_form_fields = $('#pcForm').serializeArray();
 	$('#pcForm').ajaxSubmit({
-		url:"/mgt/computer/add",
+		url:"/mgt/admin/pc/add",
 		type:'post',
 		complete:function(data){
 			if(data.status == 200)
