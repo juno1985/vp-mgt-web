@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	pc_list();
+	//start from page 1, rows - 5
+	pc_list(1,5);
 	$(".panel-heading").click(function(e) {
 		console.log(e);
 		/* 切换折叠指示图标 */
@@ -10,13 +11,24 @@ $(document).ready(function(){
 	
 	$('#mgt_content').on('click','.pcUpdateSubmit',pc_update_submit);
 });
-function pc_list(){
+function pc_list(pageNum,rows){
 	$('#mgt_content').children().remove();
+	
 	$.ajax({
 		url: "/mgt/admin/pc/list",
 		type: "GET",
+		data: {"pageNum":pageNum, "rows":rows},
 		dataType: "json",
-		success:function(data){
+		success:function(obj){
+			var data = obj.data;
+			var totalPage;
+			var totalRows = obj.totalRows;
+			//总共分几页
+		    if(totalRows/rows > parseInt(totalRows/rows)){
+		        totalPage=parseInt(totalRows/rows)+1;
+		    }else{
+		        totalPage=parseInt(totalRows/rows);
+		    }
 			var content = "<table id="+'"pcTable"'+" class="+'"table table-condensed"'+"><tbody>";
 			content += "<thead><tr><th>商品id</th><th>商品名称</th><th>商品价格</th><th>更新</th><th>删除</th></tr></thead>";
 			// v-value, i-index
@@ -31,6 +43,8 @@ function pc_list(){
 							"</tr>";
 			}); 
 			content += "</table></tbody>";
+			var pagerHtml = goPage(pageNum, rows, totalPage)
+			content += pagerHtml;
 			$('#mgt_content').append(content);
 		}
 	});	
@@ -88,4 +102,25 @@ function pc_update_submit(){
 				alert("请填入完整信息!");
 		}
 	});
+}
+function goPage(pageNum, rows, totalPage){
+	var tempStr = "<span>共"+totalPage+"页</span>";
+	  if(pageNum>1){
+	        tempStr += "<span class='btn btn-default' href=\"#\" onClick=\"pc_list("+(1)+","+rows+")\">首页</span>";
+	        tempStr += "<span class='btn btn-default' href=\"#\" onClick=\"pc_list("+(pageNum-1)+","+rows+")\">上一页</span>"
+	    }else{
+	        tempStr += "<span class='btn btn-default'>首页</span>";
+	        tempStr += "<span class='btn btn-default'>上一页</span>";
+	    }
+	  for(var pageIndex= 1;pageIndex<totalPage+1;pageIndex++){
+	        tempStr += "<a onclick=\"pc_list("+pageIndex+","+rows+")\"><span class=\"btn btn-default\">"+ pageIndex +"</span></a>";
+	    }
+	  if(pageNum<totalPage){
+	        tempStr += "<span class='btn btn-default' href=\"#\" onClick=\"pc_list("+(pageNum+1)+","+rows+")\">下一页</span>";
+	        tempStr += "<span class='btn btn-default' href=\"#\" onClick=\"pc_list("+(totalPage)+","+rows+")\">尾页</span>";
+	    }else{
+	        tempStr += "<span class='btn btn-default'>下一页</span>";
+	        tempStr += "<span class='btn btn-default'>尾页</span>";
+	    }
+	 return tempStr;
 }

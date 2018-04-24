@@ -2,6 +2,8 @@ package org.softcits.mgt.service;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,38 +24,11 @@ public class MgtComputerService {
 	@Value("${pc.admin.url}")
 	private String PC_ADMIN_URL;
 
-	public String getComputers(){
-		// 创建Httpclient对象
-		CloseableHttpClient httpclient = HttpClients.createDefault();
-		String resultString = "";
-		CloseableHttpResponse response = null;
-		try {
-			// 创建uri
-			URIBuilder builder = new URIBuilder(PC_REST_URL + PC_ADMIN_URL + "/getAll");
-			URI uri = builder.build();
-
-			// 创建http GET请求
-			HttpGet httpGet = new HttpGet(uri);
-
-			// 执行请求
-			response = httpclient.execute(httpGet);
-			// 判断返回状态是否为200
-			if (response.getStatusLine().getStatusCode() == 200) {
-				resultString = EntityUtils.toString(response.getEntity(), "UTF-8");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (response != null) {
-					response.close();
-				}
-				httpclient.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return resultString;
+	public String getComputers(String pageNum, String rows){
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("pageNum", pageNum);
+		params.put("rows", rows);
+		return HttpClientUtil.doGet(PC_REST_URL + PC_ADMIN_URL + "/getPage", params);
 	}
 
 	public String addComputer(String tradeMark, String price, String newFileName) {

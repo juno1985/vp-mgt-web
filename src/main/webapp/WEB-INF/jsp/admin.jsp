@@ -64,7 +64,7 @@
 							role="tabpanel" aria-labelledby="collapseListGroupHeading1">
 							<ul class="list-group">
 								<li class="list-group-item">
-									<a href="javascript:void(0);" onClick="pc_list()">商品列表</a>
+									<a href="javascript:void(0);" onClick="pc_list(1,5)">商品列表</a>
 								</li>
 								<li class="list-group-item">
 									<a href="javascript:void(0);" onClick="pc_add(this)" value="/mgt/page/pc_add.html">添加商品</a>

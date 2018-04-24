@@ -33,8 +33,8 @@ public class MgtComputerController {
 	private String pc_upload_path;
 	
 	@RequestMapping(path="/list",method=RequestMethod.GET)
-	public ResponseEntity<String> getAll(){
-		return new ResponseEntity<>(mgtComputerService.getComputers(),HttpStatus.OK);
+	public ResponseEntity<String> getAll(@RequestParam String pageNum, @RequestParam String rows){
+		return new ResponseEntity<>(mgtComputerService.getComputers(pageNum,rows),HttpStatus.OK);
 	}
 	
 	@RequestMapping(path="/add",method=RequestMethod.POST)
