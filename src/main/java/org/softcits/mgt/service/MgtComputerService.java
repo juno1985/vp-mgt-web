@@ -66,4 +66,8 @@ public class MgtComputerService {
 		
 		return HttpClientUtil.doPostJson(PC_REST_URL + PC_ADMIN_URL + "/add", json_computer);
 	}
+
+	public String queryComputerById(String id) {
+		return HttpClientUtil.doGet("http://localhost:8002/rest-api/admin/pc/query/"+id);
+	}
 }

@@ -13,13 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.softcits.mgt.model.MbgComputer;
 
 @RestController
 @RequestMapping("/admin/pc")
@@ -71,4 +72,18 @@ public class MgtComputerController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(path="/query/{id}", method=RequestMethod.GET)
+	public ResponseEntity<String> queryById(@PathVariable String id){
+		String computerStr = mgtComputerService.queryComputerById(id);
+		return new ResponseEntity<String>(computerStr, HttpStatus.OK);
+	}
+	
+	@RequestMapping(path="/update",method=RequestMethod.POST)
+	public ResponseEntity<String> update(@RequestParam(required=false) String cid,@RequestParam(required=false) String tradeMark, @RequestParam(required=false) String price){
+		MbgComputer mbgComputer = new MbgComputer();
+		mbgComputer.setId(Integer.parseInt(cid));
+		mbgComputer.setPrice(Float.parseFloat(price));
+		mbgComputer.setTrademark(tradeMark);
+		return new ResponseEntity<String>("Success",HttpStatus.OK);
+	}
 }
