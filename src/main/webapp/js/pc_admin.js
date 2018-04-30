@@ -57,6 +57,9 @@ function pc_add(obj){
 	});
 }
 function pc_add_submit(){
+	if(!pc_form_validate($('#pcForm'))){
+		return false;
+	}
 	var pc_form_fields = $('#pcForm').serializeArray();
 	$('#pcForm').ajaxSubmit({
 		url:"/mgt/admin/pc/add",
@@ -123,4 +126,18 @@ function goPage(pageNum, rows, totalPage){
 	        tempStr += "<span class='btn btn-default'>尾页</span>";
 	    }
 	 return tempStr;
+}
+function pc_form_validate(obj){
+	var result=true;
+	var arrayInput = $(obj).find(":text");
+	arrayInput.each(function(index, element){
+		var in_value = $(element).val();
+		if(in_value==""||in_value.length==0||in_value==null){
+			$(element).css('border','1px solid red');
+			//注意JS里return会停止本次循环并不会跳出函数
+			result = false;
+			return false;
+		}
+	});
+	return result;
 }
