@@ -68,7 +68,7 @@ function pc_add_submit(){
 			if(data.status == 200)
 				alert("添加电脑成功!");
 			else if(data.status == 400)
-				alert("请填入完整信息!");
+				alert(data.responseText);
 		}
 	});
 }

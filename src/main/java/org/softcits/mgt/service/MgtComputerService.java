@@ -13,6 +13,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.softcits.mgt.exception.PCBadRequestException;
 import org.softcits.mgt.model.MbgComputer;
 import org.softcits.utils.HttpClientUtil;
 import org.softcits.utils.JsonUtils;
@@ -32,6 +33,12 @@ public class MgtComputerService {
 	}
 
 	public String addComputer(String tradeMark, String price, String newFileName) {
+		
+		String result = queryComputerByTradeMark(tradeMark);
+		if(!"".equals(result) || result == null) {
+			throw new PCBadRequestException("TradeMark已经存在");
+		}
+		
 		MbgComputer mbgComputer = new MbgComputer();
 		mbgComputer.setTrademark(tradeMark);
 		mbgComputer.setPrice(Float.parseFloat(price));
@@ -44,5 +51,9 @@ public class MgtComputerService {
 
 	public String queryComputerById(String id) {
 		return HttpClientUtil.doGet("http://localhost:8002/rest-api/admin/pc/query/"+id);
+	}
+	
+	public String queryComputerByTradeMark(String tradeMark) {
+		return HttpClientUtil.doGet("http://localhost:8002/rest-api/admin/pc/queryName/"+tradeMark);
 	}
 }
