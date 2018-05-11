@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	//start from page 1, rows - 5
+	// start from page 1, rows - 5
 	pc_list(1,5);
 	$(".panel-heading").click(function(e) {
 		console.log(e);
@@ -23,7 +23,7 @@ function pc_list(pageNum,rows){
 			var data = obj.data;
 			var totalPage;
 			var totalRows = obj.totalRows;
-			//总共分几页
+			// 总共分几页
 		    if(totalRows/rows > parseInt(totalRows/rows)){
 		        totalPage=parseInt(totalRows/rows)+1;
 		    }else{
@@ -73,7 +73,7 @@ function pc_add_submit(){
 	});
 }
 function pcUpldate(obj){
-	//get id
+	// get id
 	var id = obj.getAttribute("value");
 	var page_link = "/mgt/page/pc_update.html";
 	$.get(page_link, function(data){
@@ -81,7 +81,7 @@ function pcUpldate(obj){
 		$('#mgt_content').html(data);
 		
 	});
-	//先查出来,然后显示到更新页面
+	// 先查出来,然后显示到更新页面
 	$.ajax({
 		url: "/mgt/admin/pc/query/" + id,
 		type: "GET",
@@ -132,12 +132,33 @@ function pc_form_validate(obj){
 	var arrayInput = $(obj).find(":text");
 	arrayInput.each(function(index, element){
 		var in_value = $(element).val();
-		if(in_value==""||in_value.length==0||in_value==null){
-			$(element).css('border','1px solid red');
-			//注意JS里return会停止本次循环并不会跳出函数
-			result = false;
-			return false;
+		var type = $(element).attr("validType");
+		switch(type){
+		case "StringNotNull":
+			if(in_value==""||in_value.length==0||in_value==null){
+				$(element).css('border','1px solid red');
+				// 注意JS里return会停止本次循环并不会跳出函数
+				result = false;
+				break;
+			}
+		case "NumNotNull":
+			var min = $(element).attr("validMin");
+			var max = $(element).attr("validMax");
+			// 判断如果不是数字
+			if(isNaN(in_value)){
+			
+				$(element).next(".err").text("必须为数字").css("color","red");
+				result = false;
+				break;
+			}else if( typeof(min)!="undefined" && in_value < min){
+				$(element).next(".err").text("必须大于"+min).css("color","red");
+				result = false;
+				break;
+			}else if( typeof(max)!="undefined" && in_value > max){
+				$("#pcForm .price").next(".err").text("必须小于"+max).css("color","red");
+				result = false;
+				break;
 		}
+	}
 	});
-	return result;
 }
