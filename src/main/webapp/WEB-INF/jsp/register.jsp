@@ -7,6 +7,8 @@
 <title>后台管理用户注册</title>
 <link rel="stylesheet"
 	href="/mgt/css/bootstrap.min.css">
+	<link rel="stylesheet"
+	href="/mgt/css/register.css">
 <!-- 引入jQuery文件 -->
 <script type="text/javascript"
 	src="/mgt/js/jquery.min.js"></script>
@@ -31,6 +33,7 @@
 			<label for="password" class="col-md-2 control-label">密&nbsp;码:</label>
 			<div class="col-md-10">
 				<input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+				<span class="glyphicon glyphicon-eye-close passwd-eye-icon"></span>
 				<span class="err"></span>
 			</div>
 		</div>
