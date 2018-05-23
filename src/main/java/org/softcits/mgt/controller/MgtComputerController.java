@@ -53,7 +53,7 @@ public class MgtComputerController {
 			
 			//创建本地实体文件
 			//F:\git-repo\SpringWeb\src\main\webapp\resources\pic + "\" + "Logo.png" 
-			File file = new File(realPath + "\\" + newFileName);
+			File file = new File(realPath + "//" + newFileName);
 			
 			//实现文件的上传拷贝
 			FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);
