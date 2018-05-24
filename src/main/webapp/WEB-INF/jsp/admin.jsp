@@ -1,24 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet"
-	href="/mgt/css/bootstrap.min.css">
+<link rel="stylesheet" href="/mgt/css/bootstrap.min.css">
 <!-- 引入jQuery文件 -->
-<script type="text/javascript"
-	src="/mgt/js/jquery.min.js"></script>
-<script type="text/javascript"
-	src="/mgt/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="/mgt/js/pc_admin.js"></script>
-<script type="text/javascript"
-	src="/mgt/js/jquery.form.js"></script>
+<script type="text/javascript" src="/mgt/js/jquery.min.js"></script>
+<script type="text/javascript" src="/mgt/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/mgt/js/pc_admin.js"></script>
+<script type="text/javascript" src="/mgt/js/jquery.form.js"></script>
 <title>后台管理</title>
 </head>
 <body>
-<div class="container">
+	<div class="container">
 		<div class="row">
 			<nav class="navbar navbar-default navbar-static-top"
 				role="navigation">
@@ -63,12 +58,10 @@
 						<div id="collapseListGroup1" class="panel-collapse collapse in"
 							role="tabpanel" aria-labelledby="collapseListGroupHeading1">
 							<ul class="list-group">
-								<li class="list-group-item">
-									<a href="javascript:void(0);" onClick="pc_list(1,5)">商品列表</a>
-								</li>
-								<li class="list-group-item">
-									<a href="javascript:void(0);" onClick="pc_add(this)" value="/mgt/page/pc_add.html">添加商品</a>
-								</li>
+								<li class="list-group-item"><a href="javascript:void(0);"
+									onClick="pc_list(1,5)">商品列表</a></li>
+								<li class="list-group-item"><a href="javascript:void(0);"
+									onClick="pc_add(this)" value="/mgt/page/pc_add.html">添加商品</a></li>
 							</ul>
 						</div>
 					</div>
@@ -78,23 +71,14 @@
 							data-toggle="collapse" data-target="#collapseListGroup2"
 							role="tab">
 							<h4 class="panel-title">
-								分组2 <span class="glyphicon glyphicon-chevron-down right"></span>
+								员工管理 <span class="glyphicon glyphicon-chevron-down right"></span>
 							</h4>
 						</div>
 						<div id="collapseListGroup2" class="panel-collapse collapse"
 							role="tabpanel" aria-labelledby="collapseListGroupHeading2">
 							<ul class="list-group">
-								<li class="list-group-item">
-									<button class="menu-item-left">
-										<span class="glyphicon glyphicon-triangle-right"></span>分组项2-1
-									</button>
+								<li class="list-group-item"><a href="javascript:void(0);">员工列表</a>
 								</li>
-								<li class="list-group-item">
-									<button class="menu-item-left">
-										<span class="glyphicon glyphicon-triangle-right"></span>分组项2-2
-									</button>
-								</li>
-
 							</ul>
 						</div>
 					</div>
