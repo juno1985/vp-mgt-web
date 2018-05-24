@@ -77,7 +77,7 @@
 						<div id="collapseListGroup2" class="panel-collapse collapse"
 							role="tabpanel" aria-labelledby="collapseListGroupHeading2">
 							<ul class="list-group">
-								<li class="list-group-item"><a href="javascript:void(0);">员工列表</a>
+								<li class="list-group-item"><a href="javascript:void(0);" onclick="user_list()">员工列表</a>
 								</li>
 							</ul>
 						</div>

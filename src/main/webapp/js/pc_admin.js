@@ -2,7 +2,6 @@ $(document).ready(function(){
 	// start from page 1, rows - 5
 	pc_list(1,5);
 	$(".panel-heading").click(function(e) {
-		console.log(e);
 		/* 切换折叠指示图标 */
 		$(this).find("span").toggleClass("glyphicon-chevron-down");
 		$(this).find("span").toggleClass("glyphicon-chevron-up");
@@ -161,4 +160,20 @@ function pc_form_validate(obj){
 		}
 	}
 	});
+}
+function get_user(json_obj){
+	$('#mgt_content').children().remove();
+	var content = "<table id="+'"pcTable"'+" class="+'"table table-condensed"'+"><tbody>";
+	content += "<thead><tr><th>员工号</th><th>姓名</th><th>创建时间</th><th>状态</th><th>角色</th></tr></thead>";
+	json_obj.forEach(function(element, index){
+		var cur_date = new Date(element.createTime);
+		content += "<tr><td>"+element.id+"</td><td>"+element.username+"</td><td>"
+					+cur_date.toLocaleDateString()+"</td><td>"+element.state+"</td><td>"
+					+element.rolename+"</td></tr>";
+	});
+	content += "</table></tbody>";
+	$('#mgt_content').append(content);
+}
+function user_list(){
+	$("head").append("<script src='http://localhost:8003/auth-api/user/getAll?callback=get_user'></script>");
 }
