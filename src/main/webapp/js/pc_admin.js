@@ -9,6 +9,8 @@ $(document).ready(function(){
 	$('#mgt_content').on('click','.pcFormSubmit',pc_add_submit);
 	
 	$('#mgt_content').on('click','.pcUpdateSubmit',pc_update_submit);
+	
+	$('#mgt_content').on('click','.userUpdateSubmit',user_update_submit);
 });
 function pc_list(pageNum,rows){
 	$('#mgt_content').children().remove();
@@ -229,6 +231,18 @@ function userUpdate(obj){
 				});
 				
 			});
+		}
+	});
+}
+function user_update_submit(){
+	$('#userUpdateForm').ajaxSubmit({
+		url:"/mgt/user/update",
+		type:'post',
+		complete:function(data){
+			if(data.status == 200)
+				alert("更改成功!");
+			else if(data.status == 400)
+				alert("请填入完整信息!");
 		}
 	});
 }
