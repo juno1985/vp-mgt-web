@@ -167,7 +167,7 @@ function get_user(json_obj){
 	content += "<thead><tr><th>员工号</th><th>姓名</th><th>创建时间</th><th>状态</th><th>角色</th></tr></thead>";
 	json_obj.forEach(function(element, index){
 		var cur_date = new Date(element.createTime);
-		content += "<tr><td>"+element.id+"</td><td>"+element.username+"</td><td>"
+		content += "<tr><td>"+element.id+"</td><td><a href=\"javascript:void(0);\" onClick=\"userUpdate(this)\" value=\"" + element.id +"\" >"+element.username+"</a></td><td>"
 					+cur_date.toLocaleDateString()+"</td><td>"+element.state+"</td><td>"
 					+element.rolename+"</td></tr>";
 	});
@@ -176,4 +176,59 @@ function get_user(json_obj){
 }
 function user_list(){
 	$("head").append("<script src='http://localhost:8003/auth-api/user/getAll?callback=get_user'></script>");
+}
+function userUpdate(obj){
+//	console.log(obj.getAttribute("value"));
+	var uid = obj.getAttribute("value");
+	$.ajax({
+		url: "http://localhost:8003/auth-api/user/" + uid + "/form",
+		type: "GET",
+		dataType: "jsonp", //跨域请求
+		success: function(data){
+			var user = data.user;
+			var rolesArray = data.roles;
+			var statesArray = data.states;
+			var page_link = "/mgt/page/user_update.html";
+			$.get(page_link, function(data){
+				$('#mgt_content').children().remove();
+				$('#mgt_content').html(data);
+				$("#userUpdateForm #uid").val(user.id);
+				$("#userUpdateForm #username").val(user.username);
+				$(rolesArray).each(function(index, element){
+					if(element.rolename == user.rolename){
+						$('#userUpdateForm #radio_roles').append(
+								"<label class=\"checkbox-inline\">"+
+								"<input type=\"radio\" name=\"rolename\" value=\"" + element.roleId + "\" checked>"+
+								element.rolename+"</label>"
+								);
+					}
+					else{
+						$('#userUpdateForm #radio_roles').append(
+								"<label class=\"checkbox-inline\">"+
+								"<input type=\"radio\" name=\"rolename\" value=\"" + element.roleId + "\">"+
+								element.rolename+"</label>"
+								);
+					}
+				});
+				
+				$(statesArray).each(function(index, element){
+					if(element == user.state){
+						$('#userUpdateForm #radio_states').append(
+								"<label class=\"checkbox-inline\">"+
+								"<input type=\"radio\" name=\"state\" value=\"" + element + "\" checked>"+
+								element+"</label>"
+								);
+					}
+					else{
+						$('#userUpdateForm #radio_states').append(
+								"<label class=\"checkbox-inline\">"+
+								"<input type=\"radio\" name=\"state\" value=\"" + element + "\">"+
+								element+"</label>"
+								);
+					}
+				});
+				
+			});
+		}
+	});
 }
