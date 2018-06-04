@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.alibaba.druid.util.StringUtils;
+
 @Controller
 public class MgtLoginController {
 	@Autowired
@@ -34,10 +36,16 @@ public class MgtLoginController {
 	
 	
 	@RequestMapping(path="/login", method=RequestMethod.POST)
-	public String login(@RequestParam String username, @RequestParam String passwd) {
+	public String login(@RequestParam String username, @RequestParam String passwd,
+			HttpServletRequest request, HttpServletResponse response) {
 		
-		System.out.println("-->" + mgtUserService.login(username, passwd));
+		String token = mgtUserService.login(username, passwd);
 		
-		return "redict:/";
+		if(!StringUtils.isEmpty(token)) {
+			//写入cookie
+			CookieUtils.setCookie(request, response, "PC_TOKEN", token);
+		}
+		
+		return "redirect:/admin/pc";
 	}
 }
