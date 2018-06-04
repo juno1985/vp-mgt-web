@@ -44,7 +44,6 @@ public class MgtComputerService {
 		mbgComputer.setPrice(Float.parseFloat(price));
 		mbgComputer.setPic(newFileName);
 		String json_computer = JsonUtils.objectToJson(mbgComputer);
-		System.out.println("web-> " + json_computer);
 		
 		return HttpClientUtil.doPostJson(PC_REST_URL + PC_ADMIN_URL + "/add", json_computer);
 	}

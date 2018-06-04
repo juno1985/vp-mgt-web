@@ -11,6 +11,28 @@ $(document).ready(function(){
 	$('#mgt_content').on('click','.pcUpdateSubmit',pc_update_submit);
 	
 	$('#mgt_content').on('click','.userUpdateSubmit',user_update_submit);
+	
+	confirmLogin();
+	
+	function confirmLogin(){
+		var _token = $.cookie("PC_TOKEN");
+		if(!_token){
+			return;
+		}
+		$.ajax({
+			url : "http://localhost:8003/auth-api/" + _token + "/token",
+			dataType : "jsonp",
+			type : "GET",
+			success : function(data, textStatus){
+				if(textStatus == "success"){
+					var username = data.username;
+					var html = "欢迎"+username+"登录";
+					$("#welcome_user").html(html);
+					
+				}
+			}
+		});
+	}
 });
 function pc_list(pageNum,rows){
 	$('#mgt_content').children().remove();

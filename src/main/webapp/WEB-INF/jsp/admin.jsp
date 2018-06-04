@@ -10,6 +10,7 @@
 <script type="text/javascript" src="/mgt/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/mgt/js/pc_admin.js"></script>
 <script type="text/javascript" src="/mgt/js/jquery.form.js"></script>
+<script type="text/javascript" src="/mgt/js/jquery.cookie.js"></script>
 <title>后台管理</title>
 </head>
 <body>
@@ -22,7 +23,9 @@
 						<a class="navbar-brand" href="#">后台管理系统</a>
 					</div>
 					<div>
+					
 						<ul class="nav navbar-nav  navbar-right">
+							<li class="disabled"><a id="welcome_user"></a></li>
 							<li class="active"><a href="#">退出登录</a></li>
 						</ul>
 					</div>
