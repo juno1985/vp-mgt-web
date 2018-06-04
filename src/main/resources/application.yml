@@ -14,3 +14,8 @@ spring:
 pc.upload.path: /upload/pc_pic
 pc.rest.url: http://localhost:8002/rest-api
 pc.admin.url: /admin/pc
+
+
+
+auth.core.base.url: http://localhost:8003
+auth.core.context-path: /auth-api
