@@ -38,6 +38,9 @@
 		</div>
 		<button type="submit" class="btn btn-success center-block">登录</button>
 	</form>
+	<div class="col-md-offset-4 col-md-4">
+		<a href="/mgt/register" class="pull-right">注册新用户</a>
+	</div>
 </div>
 </body>
 </html>
