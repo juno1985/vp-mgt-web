@@ -19,20 +19,22 @@ public class MgtUserService {
 	private String AUTH_CORE_BASE_URL;
 	@Value("${auth.core.context-path}")
 	private String AUTH_CORE_CONTEXT_PATH;
-	
-	
+
 	public String updateUser(MbgUser user) {
-		//将对象转化为json
+		// 将对象转化为json
 		String userJson = JsonUtils.objectToJson(user);
 		return HttpClientUtil.doPostJson(AUTH_CORE_BASE_URL + AUTH_CORE_CONTEXT_PATH + "/user/update", userJson);
 	}
-
 
 	public String login(String username, String passwd) {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("username", username);
 		param.put("passwd", passwd);
 		return HttpClientUtil.doPost(AUTH_CORE_BASE_URL + AUTH_CORE_CONTEXT_PATH + "/user/login", param);
-		
+
+	}
+
+	public String getUserByToken(String token) {
+		return HttpClientUtil.doGet(AUTH_CORE_BASE_URL + AUTH_CORE_CONTEXT_PATH + "/" + token + "/token");
 	}
 }

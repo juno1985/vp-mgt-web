@@ -19,3 +19,5 @@ pc.admin.url: /admin/pc
 
 auth.core.base.url: http://localhost:8003
 auth.core.context-path: /auth-api
+
+pc.login.url: /mgt/login
