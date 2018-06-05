@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.softcits.mgt.auth.AuthClass;
+import org.softcits.mgt.auth.AuthMethod;
 import org.softcits.mgt.model.MbgComputer;
-
+@AuthClass
 @RestController
 @RequestMapping("/admin/pc")
 public class MgtComputerController {
@@ -31,12 +33,12 @@ public class MgtComputerController {
 	
 	@Value("${pc.upload.path}")
 	private String pc_upload_path;
-	
+	@AuthMethod(roleId="1,3")
 	@RequestMapping(path="/list",method=RequestMethod.GET)
 	public ResponseEntity<String> getAll(@RequestParam String pageNum, @RequestParam String rows){
 		return new ResponseEntity<>(mgtComputerService.getComputers(pageNum,rows),HttpStatus.OK);
 	}
-	
+	@AuthMethod(roleId="1,3")
 	@RequestMapping(path="/add",method=RequestMethod.POST)
 	public ResponseEntity<String> addComputer(@RequestParam String tradeMark, @RequestParam String price, @RequestParam("pic")MultipartFile multipartFile, HttpServletRequest req) throws IOException{
 		
@@ -65,19 +67,19 @@ public class MgtComputerController {
 		
 		return new ResponseEntity<String>("必须上传文件", HttpStatus.OK);
 	}
-	
+	@AuthMethod(roleId="1,3")
 	@RequestMapping(path= {"/",""}, method=RequestMethod.GET)
 	public ModelAndView goAdminView() {
 		ModelAndView modelAndView = new ModelAndView("admin");
 		return modelAndView;
 	}
-	
+	@AuthMethod(roleId="1,3")
 	@RequestMapping(path="/query/{id}", method=RequestMethod.GET)
 	public ResponseEntity<String> queryById(@PathVariable String id){
 		String computerStr = mgtComputerService.queryComputerById(id);
 		return new ResponseEntity<String>(computerStr, HttpStatus.OK);
 	}
-	
+	@AuthMethod(roleId="1,3")
 	@RequestMapping(path="/update",method=RequestMethod.POST)
 	public ResponseEntity<String> update(@RequestParam(required=false) String cid,@RequestParam(required=false) String tradeMark, @RequestParam(required=false) String price){
 		MbgComputer mbgComputer = new MbgComputer();

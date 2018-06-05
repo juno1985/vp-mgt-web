@@ -8,6 +8,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 public class MgtWebApplication {
 
 	public static void main(String[] args) {
-        SpringApplication.run(MgtWebApplication.class, args);
+       SpringApplication.run(MgtWebApplication.class, args);
+      /*  SpringApplication springApplication = new SpringApplication(MgtWebApplication.class);
+        springApplication.addListeners(new VPApplicationStartup());
+        springApplication.run(args);*/
     }
 }
