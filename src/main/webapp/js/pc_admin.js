@@ -1,6 +1,5 @@
 $(document).ready(function(){
-	// start from page 1, rows - 5
-	pc_list(1,5);
+	
 	$(".panel-heading").click(function(e) {
 		/* 切换折叠指示图标 */
 		$(this).find("span").toggleClass("glyphicon-chevron-down");
@@ -28,7 +27,15 @@ $(document).ready(function(){
 					var username = data.username;
 					var html = "欢迎"+username+"登录";
 					$("#welcome_user").html(html);
-					
+				
+					//manager
+					if(data.roleId == 2){
+						$("#pcMenu").css("display","none");
+					}
+					//staff
+					else if(data.roleId == 3){
+						$("#userMenu").css("display","none");
+					}
 				}
 			}
 		});
