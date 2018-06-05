@@ -48,4 +48,17 @@ public class MgtLoginController {
 		
 		return "redirect:/admin/pc";
 	}
+	
+	@RequestMapping(path="/logout",method=RequestMethod.GET)
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		
+		String token = CookieUtils.getCookieValue(request, "PC_TOKEN");
+		
+		mgtUserService.logout(token);
+		//删除cookie
+		CookieUtils.deleteCookie(request, response, "PC_TOKEN");
+		
+		return "redirect:/login";
+	}
+	
 }

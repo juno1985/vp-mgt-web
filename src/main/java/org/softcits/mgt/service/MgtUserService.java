@@ -37,4 +37,10 @@ public class MgtUserService {
 	public String getUserByToken(String token) {
 		return HttpClientUtil.doGet(AUTH_CORE_BASE_URL + AUTH_CORE_CONTEXT_PATH + "/" + token + "/token");
 	}
+
+	public String logout(String token) {
+		return HttpClientUtil.doGet(AUTH_CORE_BASE_URL + AUTH_CORE_CONTEXT_PATH + "/user/" + token + "/logout");
+		
+	}
+	
 }

@@ -26,7 +26,7 @@
 					
 						<ul class="nav navbar-nav  navbar-right">
 							<li class="disabled"><a id="welcome_user"></a></li>
-							<li class="active"><a href="#">退出登录</a></li>
+							<li class="active"><a href="/mgt/logout" class="link-logout">退出登录</a></li>
 						</ul>
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="panel-group table-responsive" role="tablist">
-					<div class="panel panel-primary leftMenu">
+					<div id="pcMenu" class="panel panel-primary leftMenu">
 						<!-- 利用data-target指定要折叠的分组列表 -->
 						<div class="panel-heading" id="collapseListGroupHeading1"
 							data-toggle="collapse" data-target="#collapseListGroup1"
@@ -56,7 +56,7 @@
 						</div>
 					</div>
 					<!--panel end-->
-					<div class="panel panel-primary leftMenu">
+					<div id="userMenu" class="panel panel-primary leftMenu">
 						<div class="panel-heading" id="collapseListGroupHeading2"
 							data-toggle="collapse" data-target="#collapseListGroup2"
 							role="tab">
