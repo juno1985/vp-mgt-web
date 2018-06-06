@@ -3,6 +3,8 @@ package org.softcits.mgt.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.softcits.mgt.auth.AuthClass;
+import org.softcits.mgt.auth.AuthMethod;
 import org.softcits.mgt.service.MgtUserService;
 import org.softcits.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alibaba.druid.util.StringUtils;
-
+@AuthClass
 @Controller
 public class MgtLoginController {
 	@Autowired
 	private MgtUserService mgtUserService;
-
+	
 	@RequestMapping(path="/login",method=RequestMethod.GET)
 	public String goLoginView() {
 		return "login";
@@ -48,7 +50,7 @@ public class MgtLoginController {
 		
 		return "redirect:/admin/pc";
 	}
-	
+	@AuthMethod(roleId="1,2,3")
 	@RequestMapping(path="/logout",method=RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		

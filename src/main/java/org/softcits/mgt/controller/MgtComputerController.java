@@ -67,7 +67,7 @@ public class MgtComputerController {
 		
 		return new ResponseEntity<String>("必须上传文件", HttpStatus.OK);
 	}
-	@AuthMethod(roleId="1,3")
+	@AuthMethod(roleId="1,2,3")
 	@RequestMapping(path= {"/",""}, method=RequestMethod.GET)
 	public ModelAndView goAdminView() {
 		ModelAndView modelAndView = new ModelAndView("admin");

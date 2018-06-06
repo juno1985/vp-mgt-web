@@ -1,10 +1,16 @@
 package org.softcits.mgt.interceptor;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.softcits.mgt.auth.AuthUtil;
+import org.softcits.mgt.model.MbgUser;
 import org.softcits.mgt.service.MgtUserService;
 import org.softcits.utils.CookieUtils;
+import org.softcits.utils.JsonUtils;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -42,12 +48,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				return false;
 			} else {
 				// 用户已经登录，把用户信息放到request中
-				request.setAttribute("user", userJson);
+//				request.setAttribute("user", userJson);
+				//进行权限判定
+				return authBasedOnRole(userJson, handler);
 			}
 
 		}
-		// 放行
-		return true;
 	}
 
 	@Override
@@ -71,4 +77,16 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		super.afterConcurrentHandlingStarted(request, response, handler);
 	}
 
+	public Boolean authBasedOnRole(String userJson, Object handler) {
+		MbgUser user = JsonUtils.jsonToPojo(userJson, MbgUser.class);
+		Integer roleId = user.getRoleId();
+		Set<String> actions = AuthUtil.allAuths.get(roleId.toString());
+		HandlerMethod hm = (HandlerMethod)handler;
+		String reqMethod = hm.getBean().getClass().getName()+"."+hm.getMethod().getName();
+		//判断是否在允许访问方法集合中存在
+		if(!actions.isEmpty() && actions.contains(reqMethod)) {
+			return true;
+		}
+		return false;
+	}
 }
